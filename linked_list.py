@@ -12,14 +12,8 @@ class Node:
     def getData(self):
         return self.data
     # method for setting the next field of the node
-    def setNext(self, nextOne, silence=False):
-        if not silence:
-            try:
-                self.parentClass.next = nextOne
-            except:
-                self.next=nextOne
-        else:
-            self.next=nextOne
+    def setNext(self, nextOne):
+        self.next=nextOne
     # method for getting the next field of the node
     def getNext(self):
         return self.next
@@ -31,29 +25,26 @@ class LinkedList:
     def __init__(self):
         self._head = None
         self.current = None
-        self.currentNum = None
         self.tail = None
 
     def DisplayAllNodes(self, getObj=False):
         self.current=self.head
-        self.currentNum = 0
         while self.current is not None:
             if getObj:
                 yield self.current
             else:
                 yield self.current.getData()
             self.current = self.current.getNext()
-            self.currentNum += 1
 
     def GetLength(self):
         self.current=self.head
-        self.currentNum = 0
+        currentNum = 0
         while self.current is not None:
             if self.current.getNext() is not None:
-                self.currentNum+=1
+                currentNum+=1
                 self.current = self.current.getNext()
             else: break
-        return self.currentNum+1
+        return currentNum+1
 
     # Appending Methods
 
@@ -71,7 +62,7 @@ class LinkedList:
             toInsert = data
         else:
             toInsert = Node(data)
-        self.tail.setNext(toInsert, silence=True)
+        self.tail.setNext(toInsert)
         toInsert.prev = self.tail
         self.tail = toInsert
 
@@ -87,17 +78,14 @@ class LinkedList:
                 toInsert = data
             else:
                 toInsert = Node(data)
-            while self.currentNum != pos-1:
-                if self.currentNum < pos-1:
-                    self.currentNum+=1
-                    self.current = self.current.getNext()
-                elif self.currentNum > pos-1:
-                    self.currentNum-=1
-                    self.current = self.current.prev
-            toInsert.setNext(self.current.getNext(), silence=True)
+            self.current=self.head
+            currentNum = 0
+            while currentNum < pos-1:
+                currentNum+=1
+                self.current = self.current.getNext()
+            toInsert.setNext(self.current.getNext().getNext())
             toInsert.prev = self.current
-            self.current.getNext().prev = toInsert
-            self.current.setNext(toInsert, silence=True)
+            self.current.setNext(toInsert)
 
     # Deleting Methods
 
@@ -120,24 +108,18 @@ class LinkedList:
         elif pos == self.GetLength():
             self.deleteAtEnd()
         else:
-            while self.currentNum != pos-1:
-                if self.currentNum < pos-1:
-                    self.currentNum+=1
-                    self.current = self.current.getNext()
-                elif self.currentNum > pos-1:
-                    self.currentNum-=1
-                    self.current = self.current.prev
+            self.current=self.head
+            currentNum = 0
+            while currentNum < pos-1:
+                currentNum+=1
+                self.current = self.current.getNext()
             tmp = self.current.getNext().getNext()
-            self.current.setNext(tmp, silence=True)
+            self.current.setNext(tmp)
             tmp.prev = self.current
 
     @property
     def head(self):
         return self._head
-    
-    @property
-    def next(self):
-        return self.tail.getNext()
 
     @head.setter
     def head(self, value):
@@ -146,25 +128,11 @@ class LinkedList:
             self.tail = self.head
             self.tail.parentClass = self
 
-    @next.setter
-    def next(self, value):
-        if self.tail != None:
-            if value != None:
-                if isinstance(value, Node):
-                    self.tail.setNext(value, silence=True)
-                else:
-                    self.tail.setNext(Node(value), silence=True)
-                oldtail = self.tail
-                self.tail = self.tail.getNext()
-                if self.head != self.tail:
-                    self.tail.prev = oldtail
-                self.tail.parentClass = self
-
 # Testing
 linkedlist1 = LinkedList()
 linkedlist1.head = Node(1)
 print("Last Element:", linkedlist1.tail.getData())
-linkedlist1.tail.setNext(Node("2"))
+linkedlist1.insertAtEnd(Node("2"))
 print("Last Element:", linkedlist1.tail.getData())
 print("Length:", linkedlist1.GetLength())
 linkedlist1.insertAtEnd("3")
@@ -176,7 +144,7 @@ print(list(linkedlist1.DisplayAllNodes()))
 linkedlist1.deleteAtPos(1)
 print(list(linkedlist1.DisplayAllNodes()))
 print("Last Element:", linkedlist1.tail.getData())
-linkedlist1.next = Node("4")
+linkedlist1.insertAtEnd(Node("4"))
 print("Last Element:", linkedlist1.tail.getData())
 linkedlist1.deleteAtEnd()
 print("Last Element:", linkedlist1.tail.getData())
