@@ -32,15 +32,3 @@ print("\nUpdate row:", s_copy)
 s_copy[0][0] = "39999"
 print("\nUpdate column in row:", s_copy)
 
-# Transform Manually
-def transform_np_array(np_array_var):
-    new_np_array = np.array([])
-    for i in range(0, len(np_array_var[0])):
-        tmp_array = []
-        for x in np_array_var:
-            tmp_array.append(x[i])
-        new_np_array[i] = tmp_array
-    return new_np_array
-
-print(transform_np_array(s_copy))
-

@@ -1,60 +1,70 @@
-# Creating Set 
+'''
+---------------------------------------------
+MySet - My version of the class Set
+Author: Kethan Vegunta
+---------------------------------------------
+Description:
+My version of the python set. It's syntax is very similar to a regular python set. 
+'''
 
-## Using Curly braces
-print({1,2,3,4})
+class MySet:
 
-## Using Set Function (which you pass a lest)
-print(set([1,2,3,4]))
+    '''
+    Creates a set. Pass a iterable and it will add those elements to the set
+    '''
+    def __init__(self, iterable=None):
+        if iterable is not None:
+            for item in iterable:
+                self.add(item)
 
-# Access Elements in Set
+    '''
+    Add an item to the set. Take an argument item, which is the item to be inserted. Duplicate
+    items will be ignored
+    '''
+    def add(self, item):
+        setattr(self, str(item), True)
 
-## You Cannot Access Elements in Set By Index, You Have to Use Loop
+    '''
+    Clears the set. Removes all items. 
+    '''
+    def clear(self):
+        for item in self:
+            delattr(self, str(item))
 
-set1 = {1,2,3,4}
+    '''
+    Adds item from another set. Duplicate items will be ignored. 
+    '''
+    def update(self, otherSet):
+        for item in otherSet:
+            setattr(self, str(item), True)
+
+    '''
+    Removes item from set. AttributeError is item not found. 
+    '''
+    def remove(self, item):
+        delattr(self, str(item))
+
+    '''
+    Similar to remove, but will not raise error if item not found. 
+    '''
+    def discard(self, item):
+        if hasattr(self, str(item)):
+            delattr(self, str(item))
+    
+    '''
+    Iterable through the set with a for loop. 
+    '''
+    def __iter__(self):
+        for item in list(vars(self)):
+            yield item
+
+mySet1 = MySet((1,2,3))
+mySet1.add("hi")
+mySet1.add(1)
+for i in mySet1:
+    print(i)
 print()
-for element in set1:
-    print("Print All:", element)
-
-try:
-    ### This gives error
-    element[0]
-except:
-    print("Error Caught (with try and except) When Trying to Access Set By Index")
-
-# Add Element Using Add Method
-
-set1.add(12)
-print()
-for element in set1:
-    print("Add:", element)
-
-# Remove Element Using Discard Method
-
-set1.discard(1)
-print()
-for element in set1:
-    print("Discard:", element)
-
-# Union of Sets Using | (Adds all elements together, but duplicated are not add because set does not allow duplicates)
-
-set2 = {4,2,5}
-print("\nUnion:", set1|set2)
-
-# Intersection Using & (Add Common Element and Remove Duplicates)
-print("\nIntersection:", set1&set2)
-
-# Difference Using - (Takes all elements from first one, but subtract items from second that is in first one)
-print("\nDifference:", set1-set2)
-
-# Superset Using >= and Subset using <=
-
-quiz1=set(['Data Types','Data Type Conversion','Logic Operations'])
-quiz2=set(['Data Types','Data Type Conversion','Logic Operations','String Operation'])
-other = set(["Hi"])
-print(quiz1 <= quiz2)
-print(quiz2>=quiz1)
-print(quiz2>=other)
-
-# Length Using Len
-
-print("\nLength:", len(set1))
+mySet1.remove(1)
+mySet1.update((1,2,3))
+for i in mySet1:
+    print(i)

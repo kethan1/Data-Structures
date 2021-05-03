@@ -4,7 +4,7 @@ array1 = array('i', [1, 2, 3])
 # Array Types:
 # Typecode |                  Value 
 # ---------|-------------------------------------|
-#     b    |   signed integer size 1 bytes/td>   |
+#     b    |   signed integer size 1 bytes       |
 # ---------|-------------------------------------|
 #     B    |   unsigned integer of size 1 byte   |
 # ---------|-------------------------------------|
