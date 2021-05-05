@@ -11,34 +11,34 @@ from linked_list_data_structure import LinkedList, Node
 linkedlist1 = LinkedList()
 linkedlist1.head = Node(1)
 print("Last Element:", linkedlist1.tail.getData())
-assert linkedlist1.tail.getData() == 1
+if not linkedlist1.tail.getData() == 1: raise ValueError
 linkedlist1.insertAtEnd("2")
 print("Last Element:", linkedlist1.tail.getData())
-assert linkedlist1.tail.getData() == "2"
+if not linkedlist1.tail.getData() == "2": raise ValueError
 print("Length:", linkedlist1.GetLength())
-assert linkedlist1.GetLength() == 2
+if not linkedlist1.GetLength() == 2: raise ValueError
 linkedlist1.insertAtEnd("3")
 print(list(linkedlist1.DisplayAllNodes()))
-assert list(linkedlist1.DisplayAllNodes()) == [1, "2", "3"]
+if not list(linkedlist1.DisplayAllNodes()) == [1, "2", "3"]: raise ValueError
 linkedlist1.insertAtPos(1, 4)
 print("Last Element:", linkedlist1.tail.getData())
-assert linkedlist1.tail.getData() == "3"
+if not linkedlist1.tail.getData() == "3": raise ValueError
 print("Length:", linkedlist1.GetLength())
-assert linkedlist1.GetLength() == 4
+if not linkedlist1.GetLength() == 4: raise ValueError
 print(list(linkedlist1.DisplayAllNodes()))
-assert list(linkedlist1.DisplayAllNodes()) == [1, 4, "2", "3"]
+if not list(linkedlist1.DisplayAllNodes()) == [1, 4, "2", "3"]: raise ValueError
 linkedlist1.deleteAtPos(1)
 print(list(linkedlist1.DisplayAllNodes()))
-assert list(linkedlist1.DisplayAllNodes()) == [1, "2", "3"]
+if not list(linkedlist1.DisplayAllNodes()) == [1, "2", "3"]: raise ValueError
 print("Last Element:", linkedlist1.tail.getData())
-assert linkedlist1.tail.getData() == "3"
+if not linkedlist1.tail.getData() == "3": raise ValueError
 linkedlist1.insertAtEnd(Node("5"))
 print("Last Element:", linkedlist1.tail.getData())
-assert linkedlist1.tail.getData() == "5"
+if not linkedlist1.tail.getData() == "5": raise ValueError
 linkedlist1.deleteAtEnd()
 print("Last Element:", linkedlist1.tail.getData())
-assert linkedlist1.tail.getData() == "3"
+if not linkedlist1.tail.getData() == "3": raise ValueError
 print("Length:", linkedlist1.GetLength())
-assert linkedlist1.GetLength() == 3
+if not linkedlist1.GetLength() == 3: raise ValueError
 print(list(linkedlist1.DisplayAllNodes()))
-assert list(linkedlist1.DisplayAllNodes()) == [1, "2", "3"]
+if not list(linkedlist1.DisplayAllNodes()) == [1, "2", "3"]: raise ValueError

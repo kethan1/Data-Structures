@@ -133,6 +133,6 @@ with open("LogFiles/Selection_Sort.log", "r") as selection_sort_log:
     if json.loads(selection_sort_log.readline()) != sorted_list:
         print("Selection Sort Failed")
         failed = True
-
+print(failed)
 if not failed:
     sys.exit(1)
