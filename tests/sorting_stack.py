@@ -55,6 +55,6 @@ for key, value in booksSorted.items():
             failed = True
 
 print(f"Time to sort Stack: {time1}")
-
-if not failed:
+print(f"Failed: {failed}")
+if failed:
     sys.exit(1)
