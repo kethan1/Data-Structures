@@ -1,4 +1,4 @@
-name: Testing Linked List
+name: Testing Linked Stack
 
 on: [push, pull_request]
 
@@ -17,6 +17,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python linked_list_data_structure.py
-          python tests/sorting_linked_list.py
-          python tests/linked_list_test.py
+          python stack_data_structure.py
+          python tests/stack_test.py
+          python tests/sorting_stack.py
