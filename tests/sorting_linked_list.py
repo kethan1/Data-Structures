@@ -1,14 +1,14 @@
-from linked_list_data_structure import LinkedList
 import os
 import sys
 import inspect
 import json
 import timeit
 
-currentdir = os.path.dirname(os.path.abspath(
-    inspect.getfile(inspect.currentframe())))
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
+
+from linked_list_data_structure import LinkedList
 
 
 # Sorting!
