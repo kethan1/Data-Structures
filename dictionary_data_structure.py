@@ -113,19 +113,4 @@ class MyDict:
         for key, value in self.items():
             newMyDict[key] = value
         return newMyDict
-        
 
-if __name__ == "__main__":
-    myDict1 = MyDict()
-    myDict1["test1"] = "hi"
-    print(myDict1["test1"])
-    print(f"Keys: {myDict1.keys()}")
-    print(f"Values: {myDict1.values()}")
-    print(f"Items: {myDict1.items()}")
-    myDict1.update({"1": "9", "test2": "new hi"})
-    print(f"MyDict after update: {myDict1.items()}")
-    print(f"MyDict Copy: {myDict1.copy().items()}")
-    myDict1.pop("1")
-    print(f"MyDict after deleting key 1: {myDict1.items()}")
-    myDict1.clear()
-    print(f"MyDict Cleared: {myDict1.items()}")
