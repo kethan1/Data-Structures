@@ -58,13 +58,15 @@ class MySet:
         for item in list(vars(self)):
             yield item
 
-mySet1 = MySet((1,2,3))
-mySet1.add("hi")
-mySet1.add(1)
-for i in mySet1:
-    print(i)
-print()
-mySet1.remove(1)
-mySet1.update((1,2,3))
-for i in mySet1:
-    print(i)
+
+if __name__ == "__main__":
+    mySet1 = MySet((1,2,3))
+    mySet1.add("hi")
+    mySet1.add(1)
+    for i in mySet1:
+        print(i)
+    print()
+    mySet1.remove(1)
+    mySet1.update((1,2,3))
+    for i in mySet1:
+        print(i)

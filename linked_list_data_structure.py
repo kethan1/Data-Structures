@@ -8,6 +8,7 @@ This is my version of the python list. It is a double linkedlist, so you can tra
 linkedlist forward or backward.
 '''
 
+from typing import Union, Iterable, Any
 
 # Node of a doubly linkedlist
 class Node:
@@ -133,7 +134,7 @@ class LinkedList:
     :param data accepts either an instance of the class Node or some other data
     :param pos takes an integer with the position to insert the element
     '''
-    def insertAtPos(self, pos, data):
+    def insertAtPos(self, pos: int, data):
         if pos > self.GetLength() or pos < 0:
             raise IndexError("linkedlist assignment index out of range")
         elif pos == 0:
@@ -176,7 +177,7 @@ class LinkedList:
         self.tail = self.tail.prev
         self.tail.next = None
 
-    def deleteAtPos(self, pos):
+    def deleteAtPos(self, pos: int):
         if pos > self.GetLength() or pos < 0 or self.GetLength() == 0:
             raise IndexError("delete index out of range")
         elif pos == 0:
@@ -212,7 +213,7 @@ class LinkedList:
     # Returns the node at the specified position in the linkedlist
     :param pos - int specifing position at which to return element
     '''
-    def getAtPos(self, pos):
+    def getAtPos(self, pos: int):
         if pos > self.GetLength() or self.GetLength() == 0:
             raise IndexError("index out of range")
         elif pos == 0:
@@ -235,7 +236,7 @@ class LinkedList:
     def updateAtEnd(self, data):
         self.tail.data = data
 
-    def updateAtPos(self, pos, data):
+    def updateAtPos(self, pos: int, data):
         if pos > self.GetLength() or pos < 0 or self.GetLength() == 0:
             raise IndexError("update index out of range")
         elif pos == 0:
@@ -257,14 +258,14 @@ class LinkedList:
                 return currentNum
             currentNum+=1
 
-    def copy(self):
+    def copy(self) -> "LinkedList":
         to_return_copy = LinkedList()
         to_return_copy.head = Node(self.head.data)
         for i in range(1, self.GetLength()):
             to_return_copy.insertAtEnd(Node(self.getAtPos(i).data))
         return to_return_copy
 
-    def load_from_list(self, lst):
+    def load_from_iterable(self, lst: Iterable):
         for element in lst:
             self.insertAtEnd(Node(element))
 
@@ -278,7 +279,7 @@ class LinkedList:
     Linkedlist supports indexing: linkedlist_var[0].
     It also supports slices though step is not yet implemented. 
     '''
-    def __getitem__(self, index):
+    def __getitem__(self, index: Union[int, slice]) -> Union["LinkedList", Node]:
         if not isinstance(index, slice):
             return self.getAtPos(index)
         else:
@@ -341,7 +342,7 @@ class LinkedList:
     # Iterating Through linkedlist
     You can iterate through the linkedlist with a for loop. 
     '''
-    def __iter__(self):
+    def __iter__(self) -> Iterable:
         self.current=self.head
         while self.current is not None:
             yield self.current.getData()
@@ -352,7 +353,7 @@ class LinkedList:
         return self.__head
 
     @head.setter
-    def head(self, value):
+    def head(self, value: Any):
         if isinstance(value, Node):
             self.__head = value
             if self.tail == None:
@@ -361,26 +362,3 @@ class LinkedList:
             self.__head = Node(value)
             if self.tail == None:
                 self.tail = self.__head
-
-# Testing
-# linkedlist1 = LinkedList()
-# linkedlist1.head = Node(1)
-# print("Last Element:", linkedlist1.tail.getData())
-# linkedlist1.insertAtEnd(Node("2"))
-# print("Last Element:", linkedlist1.tail.getData())
-# print("Length:", linkedlist1.GetLength())
-# linkedlist1.insertAtEnd("3")
-# print(list(linkedlist1.DisplayAllNodes()))
-# linkedlist1.insertAtPos(1, 39)
-# print("Last Element:", linkedlist1.tail.getData())
-# print("Length:", linkedlist1.GetLength())
-# print(list(linkedlist1.DisplayAllNodes()))
-# linkedlist1.deleteAtPos(1)
-# print(list(linkedlist1.DisplayAllNodes()))
-# print("Last Element:", linkedlist1.tail.getData())
-# linkedlist1.insertAtEnd(Node("4"))
-# print("Last Element:", linkedlist1.tail.getData())
-# linkedlist1.deleteAtEnd()
-# print("Last Element:", linkedlist1.tail.getData())
-# print("Length:", linkedlist1.GetLength())
-# print(list(linkedlist1.DisplayAllNodes()))
