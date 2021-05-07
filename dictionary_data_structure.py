@@ -6,7 +6,7 @@ Author: Kethan Vegunta
 Description:
 My version of the python dictionary. It's syntax is very similar to a regular python dict. 
 '''
-
+import pickle
 
 class MyDict:
     '''
@@ -21,14 +21,14 @@ class MyDict:
     myDict1["hi"]
     '''
     def __getitem__(self, key):
-        return getattr(self, str(key))
+        return getattr(self, self.__convert_item_to_str(key))
 
     '''
     Set Item:
     myDict1["hi"] = 1
     '''
     def __setitem__(self, key, value):
-        setattr(self, str(key), value)
+        setattr(self, self.__convert_item_to_str(key), value)
 
     '''
     Delete Item:
@@ -37,7 +37,7 @@ class MyDict:
     myDict1.pop("hi")
     '''
     def __delitem__(self, key):
-        delattr(self, str(key))
+        delattr(self, self.__convert_item_to_str(key))
 
     '''
     Iterate Through MyDict:
@@ -46,7 +46,7 @@ class MyDict:
     '''
     def __iter__(self):
         for key in list(vars(self)):
-            yield key
+            yield self.__convert_str_to_item(key)
 
     '''
     keys() returns a set containing all the keys
@@ -55,7 +55,7 @@ class MyDict:
         print(key)
     '''
     def keys(self):
-        return set(vars(self))
+        return {self.__convert_str_to_item(key) for key in vars(self)}
 
     '''
     values() returns a set containing the value of all the keys
@@ -64,7 +64,7 @@ class MyDict:
         print(key)
     '''
     def values(self):
-        return {self[i] for i in list(vars(self))}
+        return {self[self.__convert_str_to_item(key)] for key in list(vars(self))}
 
     '''
     items() returns a set of tuples, with each tuple containing a key, value pair
@@ -73,7 +73,7 @@ class MyDict:
         print(key, value)
     '''
     def items(self):
-        return {(i, self[i]) for i in list(vars(self))}
+        return {(self.__convert_str_to_item(key), self[self.__convert_str_to_item(key)]) for key in list(vars(self))}
 
     '''
     Update MyDict:
@@ -113,4 +113,10 @@ class MyDict:
         for key, value in self.items():
             newMyDict[key] = value
         return newMyDict
+    
+    def __convert_item_to_str(self, item):
+        return pickle.dumps(item).decode('unicode_escape')
+
+    def __convert_str_to_item(self, item):
+        return pickle.loads(item.encode('utf-8', 'unicode_escape').replace(b'\xc2', b''))
 

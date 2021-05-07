@@ -18,3 +18,4 @@ jobs:
           architecture: x64
       - run: |
           python set_data_structure.py
+          python tests/set_test.py

@@ -7,6 +7,8 @@ Description:
 My version of the python set. It's syntax is very similar to a regular python set. 
 '''
 
+import pickle
+
 class MySet:
 
     '''
@@ -22,51 +24,53 @@ class MySet:
     items will be ignored
     '''
     def add(self, item):
-        setattr(self, str(item), True)
+        setattr(self, self.__convert_item_to_str(item), True)
 
     '''
     Clears the set. Removes all items. 
     '''
     def clear(self):
         for item in self:
-            delattr(self, str(item))
+            delattr(self, item)
 
     '''
     Adds item from another set. Duplicate items will be ignored. 
     '''
     def update(self, otherSet):
         for item in otherSet:
-            setattr(self, str(item), True)
+            self.add(item)
 
     '''
     Removes item from set. AttributeError is item not found. 
     '''
     def remove(self, item):
-        delattr(self, str(item))
+        delattr(self, self.__convert_item_to_str(item))
 
     '''
     Similar to remove, but will not raise error if item not found. 
     '''
     def discard(self, item):
-        if hasattr(self, str(item)):
-            delattr(self, str(item))
+        if hasattr(self, self.__convert_item_to_str(item)):
+            delattr(self, self.__convert_item_to_str(item))
+
+    def __convert_item_to_str(self, item):
+        return pickle.dumps(item).decode('unicode_escape')
+
+    def __convert_str_to_item(self, item):
+        return pickle.loads(item.encode('utf-8', 'unicode_escape').replace(b'\xc2', b''))
+
+    def __str__(self):
+        to_return = []
+        for item in list(vars(self)):
+            to_return.append(str(self.__convert_str_to_item(item)))
+        return "{" + ', '.join(to_return) + "}"
+
+    def return_as_python_set(self):
+        return {item for item in self}
     
     '''
     Iterable through the set with a for loop. 
     '''
     def __iter__(self):
         for item in list(vars(self)):
-            yield item
-
-
-if __name__ == "__main__":
-    mySet1 = MySet((1,2,3))
-    mySet1.add("hi")
-    mySet1.add(1)
-    for i in mySet1:
-        print(i)
-    print()
-    mySet1.remove(1)
-    mySet1.update((1,2,3))
-    for i in mySet1:
-        print(i)
+            yield self.__convert_str_to_item(item)
