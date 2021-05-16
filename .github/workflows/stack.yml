@@ -18,5 +18,5 @@ jobs:
           architecture: x64
       - run: |
           python stack_data_structure.py
-          python tests/stack_test.py
-          python tests/sorting_stack.py
+          python tests/stack/stack_test.py
+          python tests/stack/sorting_stack.py
