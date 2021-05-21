@@ -240,7 +240,7 @@ class LinkedList:
         self.tail.data = data
 
     def updateAtPos(self, pos: int, data):
-        data = self.__toNode(data)
+        data = self.__toData(data)
         if pos > self.GetLength() or pos < 0 or self.GetLength() == 0:
             raise IndexError("update index out of range")
         elif pos == 0:
@@ -282,6 +282,11 @@ class LinkedList:
     def __toNode(self, data):
         if not isinstance(data, Node):
             return Node(data)
+        return data
+
+    def __toData(self, data):
+        if isinstance(data, Node):
+            return data.data
         return data
 
     '''
