@@ -64,10 +64,13 @@ class Node:
         return Node(self.data)
 
 class LinkedList:
-    def __init__(self):
+    def __init__(self, iterable: Iterable = None):
         self.__head = None
         self.current = None
         self.tail = None
+        if iterable is not None:
+            for item in iterable:
+                self.insertAtEnd(item)
 
     '''
     Method to display all the Nodes. Returns the data of then Node. 
@@ -237,6 +240,7 @@ class LinkedList:
         self.tail.data = data
 
     def updateAtPos(self, pos: int, data):
+        data = self.__toNode(data)
         if pos > self.GetLength() or pos < 0 or self.GetLength() == 0:
             raise IndexError("update index out of range")
         elif pos == 0:
@@ -276,7 +280,14 @@ class LinkedList:
         return self.GetLength()
 
     '''
-    Linkedlist supports indexing: linkedlist_var[0].
+    LinkedList supports item assignments: linkedlist_var[0] = 99
+    This updates the item's data at the specified position, to the specified data
+    '''
+    def __setitem__(self, key: int, value):
+        self.updateAtPos(key, value)
+
+    '''
+    LinkedList supports indexing: linkedlist_var[0].
     It also supports slices though step is not yet implemented. 
     '''
     def __getitem__(self, index: Union[int, slice]) -> Union["LinkedList", Node]:
@@ -347,6 +358,9 @@ class LinkedList:
         while self.current is not None:
             yield self.current.getData()
             self.current = self.current.getNext()
+
+    def __str__(self) -> str:
+        return f"[{', '.join(str(item) for item in self)}]"
 
     @property
     def head(self):
