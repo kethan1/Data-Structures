@@ -279,6 +279,11 @@ class LinkedList:
     def __len__(self):
         return self.GetLength()
 
+    def __toNode(self, data):
+        if not isinstance(data, Node):
+            return Node(data)
+        return data
+
     '''
     LinkedList supports item assignments: linkedlist_var[0] = 99
     This updates the item's data at the specified position, to the specified data
@@ -316,7 +321,7 @@ class LinkedList:
                                 if step_startIndex == 0:
                                     copy_of_current_linked_list.insertAtEnd(Node(element.data))
                                 else:
-                                    if step_startIndex%step == 0:
+                                    if step_startIndex % step == 0:
                                         copy_of_current_linked_list.insertAtEnd(Node(element.data))
                                 step_startIndex+=1
                             currentIndex+=1
