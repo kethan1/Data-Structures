@@ -21,7 +21,7 @@ class Node:
 
     # method for setting the data field of the node
     def setData(self, data):
-        self.data=data
+        self.data = data
 
     # method for getting the data field of the node
     def getData(self):
@@ -29,7 +29,7 @@ class Node:
 
     # method for setting the next field of the node
     def setNext(self, nextOne):
-        self.next=nextOne
+        self.next = nextOne
 
     # method for getting the next field of the node
     def getNext(self):
@@ -112,8 +112,8 @@ class MyList:
             currentNum = 0
             while currentNum < pos-1:
                 currentNum+=1
-                self.current = self.current.getNext()
-            tmp = self.current.getNext()
+                self.current = self.current.next
+            tmp = self.current.next
             data.next = tmp
             data.prev = self.current
             self.current.next = data
@@ -128,7 +128,7 @@ class MyList:
             raise IndexError("delete index out of range")
         elif pos == 0:
             toReturn = self.head
-            tmp = self.head.getNext()
+            tmp = self.head.next
             self.head = tmp
             if tmp == None:
                 self.tail = None
@@ -143,9 +143,9 @@ class MyList:
             currentNum = 0
             while currentNum < pos-1:
                 currentNum+=1
-                self.current = self.current.getNext()
-            toReturn = self.current.getNext()
-            tmp = self.current.getNext().getNext()
+                self.current = self.current.next
+            toReturn = self.current.next
+            tmp = self.current.next.next
             if tmp is not None:
                 self.current.next = tmp
                 tmp.prev = self.current
@@ -262,9 +262,9 @@ class MyList:
         currentNum = 0
         if self.current != None:
             while self.current is not None:
-                if self.current.getNext() is not None:
+                if self.current.next is not None:
                     currentNum+=1
-                    self.current = self.current.getNext()
+                    self.current = self.current.next
                 else: break
             return currentNum+1
 
@@ -285,7 +285,7 @@ class MyList:
             currentNum = 0
             while currentNum < pos:
                 currentNum+=1
-                self.current = self.current.getNext()
+                self.current = self.current.next
             self.current.data = data
 
     '''
@@ -307,7 +307,7 @@ class MyList:
                 currentNum = 0
                 while currentNum < index:
                     currentNum+=1
-                    self.current = self.current.getNext()
+                    self.current = self.current.next
                 return self.current
         else:
             start = 0 if index.start is None else index.start
@@ -343,7 +343,7 @@ class MyList:
                             if start <= currentIndex < stop:
                                 copy_of_current_my_list.insertAtEnd(Node(self.current.data))
                             currentIndex+=1
-                            self.current = self.current.getPrev()
+                            self.current = self.current.prev
                         return copy_of_current_my_list
                 else:
                     step_startIndex = None
@@ -380,8 +380,8 @@ class MyList:
             if getObj:
                 yield self.current
             else:
-                yield self.current.getData()
-            self.current = self.current.getNext()
+                yield self.current.data
+            self.current = self.current.next
 
     def __add__(self, value) -> "MyList":
         copyList = self.copy()
