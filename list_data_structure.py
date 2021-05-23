@@ -168,7 +168,7 @@ class MyList:
     def copy(self) -> "MyList":
         to_return_copy = MyList()
         for index in range(0, len(self)):
-            to_return_copy.append(Node(self[index].data))
+            to_return_copy.append(Node(self[index]))
         return to_return_copy
 
     def sort(self, part: "MyList" = None):
@@ -187,7 +187,7 @@ class MyList:
             current = currentLeft = currentRight = 0
 
             while currentLeft < len(mergeSortLeft) and currentRight < len(mergeSortRight):
-                if mergeSortLeft[currentLeft].data < mergeSortRight[currentRight].data:
+                if mergeSortLeft[currentLeft] < mergeSortRight[currentRight]:
                     copyList[current] = mergeSortLeft[currentLeft]
                     currentLeft+=1
                 else:
@@ -225,16 +225,10 @@ class MyList:
         for item in self.copy():
             self.remove(item)
 
-    def reverse(self) -> None:
-        for index, item in enumerate(self.copy()):
-            self.remove(item)
-            print(index, item)
-            self.insert(-(index+1), item)
-            print(item, self)
-
     def reverse(self):
         prev = None
         self.current = self.head
+        self.tail = self.head
         while self.current is not None:
             next = self.current.next
             self.current.next = prev
@@ -297,9 +291,9 @@ class MyList:
             if index > len(self) or len(self) == 0:
                 raise IndexError("index out of range")
             elif index == 0:
-                return self.__head
+                return self.__head.data
             elif index == len(self):
-                return self.tail
+                return self.tail.data
             else:
                 if index < 0:
                     index = len(self)-(abs(index)-1)
@@ -308,7 +302,7 @@ class MyList:
                 while currentNum < index:
                     currentNum+=1
                     self.current = self.current.next
-                return self.current
+                return self.current.data
         else:
             start = 0 if index.start is None else index.start
             stop = len(self) if index.stop is None else index.stop
