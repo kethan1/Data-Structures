@@ -17,11 +17,11 @@ class Node:
                 data = str(data)
                 space_after_line = "   "
                 space_after_line = space_after_line * index
-                try:
+                if len(lines)-1 > index:
                     lines[index+1] += "   " + data
                     if top:
                         lines[index+1] += space_after_line
-                except:
+                else:
                     if top:
                         lines.append(data + space_after_line)
                     else:
@@ -61,6 +61,6 @@ root[0][0].insert("Flask")
 root[0][0].insert("Django")
 root[0][1].insert("Express")
 root[0][2].insert("Ruby on Rails")
+root[0][0][0].insert(1.1)
 root[0][0][0].insert(2.1)
-root[0][0][0].insert(True)
 print(root)
