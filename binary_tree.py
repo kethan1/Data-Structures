@@ -1,43 +1,42 @@
+from typing import Union, Any
+
+
 class Node:
-    def __init__(self,data):
-        self.data = data
-        self.children = []
+    def __init__(self, data: Any):
+        self.data: Any = data
+        self.children: list = []
     
-    def insert(self, data):
+    def insert(self, data: Any):
         self.children.append(Node(data))
 
-
-    def __str__(self, top=True):
-        lines = []
+    def __str__(self, top: bool=True) -> str:
+        lines: list = []
         lines.append(str(self.data))
         for child in self.children:
-            children_str = child.__str__(top=False).split("\n")
-            # if top:
-            #     print(children_str)
-            for index, data in enumerate(children_str):
+            for index, data in enumerate(child.__str__(top=False).split("\n")):
+                data = str(data)
                 space_after_line = "   "
                 space_after_line = space_after_line * index
                 try:
+                    lines[index+1] += "   " + data
                     if top:
-                        lines[index+1] += "   " + str(data) + "   "
-                    else:
-                        lines[index+1] += "    " + str(data)
+                        lines[index+1] += space_after_line
                 except:
                     if top:
-                        lines.append(str(data) + space_after_line)
+                        lines.append(data + space_after_line)
                     else:
-                        lines.append(str(data))
+                        lines.append(data)
                 for line_number in range(1, len(lines)-1):
                     if len(lines[line_number+1]) > len(lines[line_number]):
                         lines[line_number] += " " * ((len(lines[line_number+1])-len(lines[line_number])))
 
-        lines[0] = " " * int((len(max(lines, key=len)) - len(self.data))/2) + lines[0]
+        lines[0] = " " * int((len(max(lines, key=len)) - len(str(self.data)))/2) + lines[0]
         return '\n'.join(lines)
 
-    def hasChildren(self):
+    def hasChildren(self) -> bool:
         return bool(self.children)
 
-    def __getitem__(self, pos: int):
+    def __getitem__(self, pos: Union[int, slice]):
         return self.children[pos]
     
 root = Node("Languages Good For")
@@ -62,6 +61,6 @@ root[0][0].insert("Flask")
 root[0][0].insert("Django")
 root[0][1].insert("Express")
 root[0][2].insert("Ruby on Rails")
-root[0][0][0].insert("v1.1")
-root[0][0][0].insert("v2.1")
+root[0][0][0].insert(2.1)
+root[0][0][0].insert(True)
 print(root)
