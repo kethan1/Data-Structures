@@ -29,10 +29,9 @@ class Node:
                         if top:
                             lines[index+1] += space_after_line
                     else:
+                        lines.append(data)
                         if top:
-                            lines.append(data + space_after_line)
-                        else:
-                            lines.append(data)
+                            lines[-1] += space_after_line
                     for line_number in range(1, len(lines) - 1):
                         if len(lines[line_number + 1]) > len(lines[line_number]):
                             lines[line_number] += " " * (len(lines[line_number + 1]) - len(lines[line_number]))
@@ -42,11 +41,3 @@ class Node:
 
     def hasChildren(self) -> bool:
         return self.left is not None and self.right is not None
-    
-root = Node(9)
-root.set_left(11)
-root.set_right(6)
-root.left.set_left(120)
-root.left.set_right(10)
-root.right.set_left(120)
-print(root.__str__())

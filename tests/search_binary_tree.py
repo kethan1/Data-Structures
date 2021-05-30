@@ -1,3 +1,11 @@
+import os
+import sys
+import inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
+
 from binary_tree import Node
 
 root = Node(30)
@@ -47,4 +55,14 @@ def binary_tree_iterative_search(rootNode, numberToFind):
     return pattern
 
 print(binary_tree_recursive_search(root, 38))
+if not binary_tree_recursive_search(root, 38) == ['right', 'left', 'found']: ValueError
+print(binary_tree_iterative_search(root, 38))
+if not binary_tree_iterative_search(root, 38) == ['right', 'left', 'found']: raise ValueError
+print(binary_tree_recursive_search(root, 320))
+if not binary_tree_recursive_search(root, 320) == ['right', 'right', 'found']: raise ValueError
 print(binary_tree_iterative_search(root, 320))
+if not binary_tree_iterative_search(root, 320) == ['right', 'right', 'found']: raise ValueError
+print(binary_tree_recursive_search(root, 300))
+if not binary_tree_recursive_search(root, 300) == ['right', 'right', 'left', 'not found']: raise ValueError
+print(binary_tree_iterative_search(root, 300))
+if not binary_tree_iterative_search(root, 300) == ['right', 'right', 'left', 'not found']: raise ValueError
