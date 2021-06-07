@@ -1,4 +1,4 @@
-name: Testing Binary Tree
+name: Testing Tree
 
 on: [push, pull_request]
 
@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.x', 'pypy-3.7']
-    name: Python ${{ matrix.python-version }} Binary Tree Testing
+    name: Python ${{ matrix.python-version }} Tree Testing
     steps:
       - uses: actions/checkout@v2
       - name: Setup python
@@ -17,6 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python binary_tree.py
-          python tests/binary_tree_test.py
-          python tests/search_binary_tree.py
+          python tree_data_structure.py
+          python tests/tree_test.py
