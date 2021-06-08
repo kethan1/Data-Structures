@@ -366,7 +366,7 @@ class LinkedList:
     You can iterate through the linkedlist with a for loop. 
     '''
     def __iter__(self) -> Iterable:
-        self.current=self.head
+        self.current = self.head
         while self.current is not None:
             yield self.current.getData()
             self.current = self.current.getNext()
@@ -382,9 +382,9 @@ class LinkedList:
     def head(self, value: Any):
         if isinstance(value, Node):
             self.__head = value
-            if self.tail == None:
+            if self.tail is None:
                 self.tail = self.__head
         else:
             self.__head = Node(value)
-            if self.tail == None:
+            if self.tail is None:
                 self.tail = self.__head
