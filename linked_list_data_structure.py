@@ -91,13 +91,14 @@ class LinkedList:
     Returns the length of the linkedlist
     '''
     def GetLength(self):
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         while self.current is not None:
             if self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
-            else: break
+            else: 
+                break
         return currentNum+1
 
     # Appending Methods
@@ -151,17 +152,16 @@ class LinkedList:
                 toInsert = data
             else:
                 toInsert = Node(data)
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos-1:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
             tmp = self.current.getNext()
             toInsert.next = tmp
             toInsert.prev = self.current
             self.current.next = toInsert
             tmp.prev = toInsert
-            
 
     # Deleting Methods
 
@@ -170,7 +170,7 @@ class LinkedList:
     '''
     def deleteAtBeginning(self):
         tmp = self.head.getNext()
-        if tmp == None:
+        if tmp is None:
             self.tail = None
         self.head = tmp
         self.head.prev = None
@@ -190,10 +190,10 @@ class LinkedList:
         elif pos == self.GetLength():
             self.deleteAtEnd()
         else:
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos-1:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
             tmp = self.current.getNext().getNext()
             if tmp is not None:
@@ -228,10 +228,10 @@ class LinkedList:
         else:
             if pos < 0:
                 pos = self.GetLength()-(abs(pos)-1)
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
             return self.current
 
@@ -250,10 +250,10 @@ class LinkedList:
         elif pos == self.GetLength():
             self.tail.data = data
         else:
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
             self.current.data = data
 
@@ -262,7 +262,7 @@ class LinkedList:
         for element in self.DisplayAllNodes():
             if element == element_to_find:
                 return currentNum
-            currentNum+=1
+            currentNum += 1
 
     def copy(self) -> "LinkedList":
         to_return_copy = LinkedList()
@@ -276,7 +276,7 @@ class LinkedList:
             self.insertAtEnd(Node(element))
 
     '''
-    Returns length of linkedlist. 
+    Returns length of linkedlist.
     '''
     def __len__(self):
         return self.GetLength()
@@ -293,14 +293,15 @@ class LinkedList:
 
     '''
     LinkedList supports item assignments: linkedlist_var[0] = 99
-    This updates the item's data at the specified position, to the specified data
+    This updates the item's data at the specified position, to the specified
+    data
     '''
     def __setitem__(self, key: int, value):
         self.updateAtPos(key, value)
 
     '''
     LinkedList supports indexing: linkedlist_var[0].
-    It also supports slices though step is not yet implemented. 
+    It also supports slices though step is not yet implemented.
     '''
     def __getitem__(self, index: Union[int, slice]) -> Union["LinkedList", Node]:
         if not isinstance(index, slice):
@@ -323,47 +324,57 @@ class LinkedList:
                         step_startIndex = None
                         for element in self.DisplayAllNodes(getObj=True):
                             if start <= currentIndex < stop:
-                                if step_startIndex == None:
+                                if step_startIndex is None:
                                     step_startIndex = 0
                                 if step_startIndex == 0:
-                                    copy_of_current_linked_list.insertAtEnd(Node(element.data))
+                                    copy_of_current_linked_list.insertAtEnd(
+                                        Node(element.data)
+                                    )
                                 else:
                                     if step_startIndex % step == 0:
-                                        copy_of_current_linked_list.insertAtEnd(Node(element.data))
-                                step_startIndex+=1
-                            currentIndex+=1
+                                        copy_of_current_linked_list.insertAtEnd(
+                                            Node(element.data)
+                                        )
+                                step_startIndex += 1
+                            currentIndex += 1
                     else:
                         self.current = self.tail
                         currentNum = self.GetLength()-1
                         while currentNum >= 0:
                             if start <= currentIndex < stop:
-                                copy_of_current_linked_list.insertAtEnd(Node(self.current.data))
-                            currentIndex+=1
+                                copy_of_current_linked_list.insertAtEnd(
+                                    Node(self.current.data)
+                                )
+                            currentIndex += 1
                             self.current = self.current.getPrev()
                         return copy_of_current_linked_list
                 else:
                     step_startIndex = None
                     for element in self.DisplayAllNodes(getObj=True):
                         if start <= currentIndex < stop:
-                            if step_startIndex == None:
+                            if step_startIndex is None:
                                 step_startIndex = 0
                             if step_startIndex == 0:
-                                copy_of_current_linked_list.insertAtEnd(Node(element.data))
+                                copy_of_current_linked_list.insertAtEnd(
+                                    Node(element.data)
+                                )
                             else:
-                                if step_startIndex%step == 0:
-                                    copy_of_current_linked_list.insertAtEnd(Node(element.data))
-                            step_startIndex+=1
-                        currentIndex+=1
+                                if step_startIndex % step == 0:
+                                    copy_of_current_linked_list.insertAtEnd(
+                                        Node(element.data)
+                                    )
+                            step_startIndex += 1
+                        currentIndex += 1
                 return copy_of_current_linked_list
             for element in self.DisplayAllNodes(getObj=True):
                 if start <= currentIndex < stop:
                     copy_of_current_linked_list.insertAtEnd(Node(element.data))
-                currentIndex+=1
+                currentIndex += 1
             return copy_of_current_linked_list
 
     '''
     # Iterating Through linkedlist
-    You can iterate through the linkedlist with a for loop. 
+    You can iterate through the linkedlist with a for loop.
     '''
     def __iter__(self) -> Iterable:
         self.current = self.head
