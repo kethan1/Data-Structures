@@ -2,9 +2,12 @@ import os
 import sys
 import inspect
 
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0, parentdir) 
+sys.path.insert(0, os.path.dirname(
+        os.path.dirname(
+            os.path.abspath(inspect.getfile(inspect.currentframe()))
+        )
+    )
+)
 
 from binary_tree import Node
 
@@ -15,5 +18,4 @@ root.left.set_left(120)
 root.left.set_right(10)
 root.right.set_left(120)
 print(root)
-if not str(root) == '       9\n  11        6   \n120  10    120  ':
-    raise ValueError
+assert str(root) == '       9\n  11        6   \n120  10    120  '

@@ -2,9 +2,8 @@ import os
 import sys
 import inspect
 
-currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-sys.path.insert(0, parentdir)
+sys.path.insert(0, os.path.dirname(
+    os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))))
 
 from tree_data_structure import Node
 
@@ -18,6 +17,5 @@ root[1].insert("Jan")
 root[1].insert("Joe")
 root.insert("Joe")
 
-if not str(root) == "Udo\n├── Marc\n│   └── Lian\n│       └── Lian\n├── Dan\n│   ├── Jet\n│   ├── Jan\n│   └── Joe\n└── Joe":  raise ValueError
-
+assert str(root) == "Udo\n├── Marc\n│   └── Lian\n│       └── Lian\n├── Dan\n│   ├── Jet\n│   ├── Jan\n│   └── Joe\n└── Joe"
 print(root)

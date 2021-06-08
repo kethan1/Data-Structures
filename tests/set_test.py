@@ -7,14 +7,10 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
 from set_data_structure import MySet
+from class_for_testing import TestClass
 
-class TestClass:
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-    
-def test_condition(condition): 
+
+def test_condition(condition):
     if not condition: raise ValueError
 
 mySet1 = MySet((1, 2, 3))
