@@ -4,11 +4,12 @@ LinkedList - My version of the class List
 Author: Kethan Vegunta
 ---------------------------------------------
 Description:
-This is my version of the python list. It is a double linkedlist, so you can traverse the
-linkedlist forward or backward.
+This is my version of the python list. It is a double linkedlist, so you can
+traverse the linkedlist forward or backward.
 '''
 
 from typing import Union, Iterable, Any
+
 
 # Node of a doubly linkedlist
 class Node:
@@ -20,7 +21,7 @@ class Node:
 
     # method for setting the data field of the node
     def setData(self, data):
-        self.data=data
+        self.data = data
 
     # method for getting the data field of the node
     def getData(self):
@@ -28,7 +29,7 @@ class Node:
 
     # method for setting the next field of the node
     def setNext(self, nextOne):
-        self.next=nextOne
+        self.next = nextOne
 
     # method for getting the next field of the node
     def getNext(self):
@@ -36,7 +37,7 @@ class Node:
 
     # return True if the node has a pointer to the next node
     def hasNext(self):
-        return self.next != None
+        return self.next is not None
 
     # method for setting the next field of the node
     def setPrev(self, prevOne):
@@ -48,7 +49,7 @@ class Node:
 
     # return True if the node has a pointer to the previous node
     def hasPrev(self):
-        return self.prev != None
+        return self.prev is not None
 
     '''
     returns a copy of the current Node's data
@@ -63,6 +64,7 @@ class Node:
             return to_return
         return Node(self.data)
 
+
 class LinkedList:
     def __init__(self, iterable: Iterable = None):
         self.__head = None
@@ -73,11 +75,11 @@ class LinkedList:
                 self.insertAtEnd(item)
 
     '''
-    Method to display all the Nodes. Returns the data of then Node. 
+    Method to display all the Nodes. Returns the data of then Node.
     :param getObj, returns the Node object instead of the data
-    '''    
+    '''
     def DisplayAllNodes(self, getObj=False):
-        self.current=self.head
+        self.current = self.head
         while self.current is not None:
             if getObj:
                 yield self.current

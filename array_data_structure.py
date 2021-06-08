@@ -1,7 +1,7 @@
-from array import *
+from array import array
 
 # Array Types:
-# Typecode |                  Value 
+# Typecode |                  Value
 # ---------|-------------------------------------|
 #     b    |   signed integer size 1 bytes       |
 # ---------|-------------------------------------|
@@ -17,23 +17,28 @@ from array import *
 # ---------|-------------------------------------|
 
 '''
-Signed integers allow that negative numbers. 
+Signed integers allow that negative numbers.
 
 b is an signed integer of 1 byte.
-This means that when an array uses typecode b, numbers in the range of -128 to 127 are allowed.
+This means that when an array uses typecode b, numbers in the range of -128 to
+127 are allowed.
 
-B is an unsigned integer of 1 byte. 
-This means that when an array uses typecode B, numbers in the range of 0 to 255 are allowed. 
+B is an unsigned integer of 1 byte.
+This means that when an array uses typecode B, numbers in the range of 0 to
+255 are allowed.
 
 i is a signed integer of 2 bytes (larger).
-This means that when an array uses typecode i, numbers in the range of -2147483648 to 2147483647 are allowed. 
+This means that when an array uses typecode i, numbers in the range of
+-2147483648 to 2147483647 are allowed.
 
 I is an unsigned integer of 2 bytes (larger).
-This means that when an array uses typecode I, numbers in the range of 0 to 4294967295 are allowed. 
+This means that when an array uses typecode I, numbers in the range of 0 to
+4294967295 are allowed.
 
-f is a floating point number of 4 bytes. 
+f is a floating point number of 4 bytes.
 
-If you need larger floating point numbers, you can use d, floating point numbers of 8 bytes. 
+If you need larger floating point numbers, you can use d, floating point
+numbers of 8 bytes.
 '''
 array1 = array('b', [127, -128, 99, 81])
 array2 = array('B', [255, 99, 81, 0])

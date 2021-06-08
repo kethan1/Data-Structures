@@ -1,6 +1,7 @@
 class QueueOverflow(BaseException):
     pass
 
+
 # Node of a doubly linkedlist
 class Node:
     # constructor
@@ -11,7 +12,7 @@ class Node:
 
     # method for setting the data field of the node
     def setData(self, data):
-        self.data=data
+        self.data = data
 
     # method for getting the data field of the node
     def getData(self):
@@ -19,7 +20,7 @@ class Node:
 
     # method for setting the next field of the node
     def setNext(self, nextOne):
-        self.next=nextOne
+        self.next = nextOne
 
     # method for getting the next field of the node
     def getNext(self):
@@ -27,7 +28,7 @@ class Node:
 
     # return True if the node has a pointer to the next node
     def hasNext(self):
-        return self.next != None
+        return self.next is not None
 
     # method for setting the next field of the node
     def setPrev(self, prevOne):
@@ -39,7 +40,7 @@ class Node:
 
     # return True if the node has a pointer to the previous node
     def hasPrev(self):
-        return self.prev != None
+        return self.prev is not None
 
     '''
     returns a copy of the current Node's data
@@ -53,6 +54,7 @@ class Node:
             to_return.prev = self.prev
             return to_return
         return Node(self.data)
+
 
 # Linked Queue
 class Queue:
@@ -75,7 +77,8 @@ class Queue:
         return Node(data)
 
     '''
-    Checks if stack has too many elements, and if it does, it raises StackOverflow
+    Checks if stack has too many elements, and if it does, it raises
+    StackOverflow
     '''
     def __isError(self):
         if self.limit is not None and self.limit <= self.Size():
@@ -120,11 +123,11 @@ class Queue:
     Returns the size of the stack
     '''
     def Size(self):
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         if self.current is not None:
             while self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
             return currentNum+1
         return currentNum
@@ -148,11 +151,11 @@ class Queue:
     Do not use this, testing only
     '''
     def showAll(self):
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         if self.current is not None:
             while self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 yield self.current.data
                 self.current = self.current.getNext()
             yield self.current.data
@@ -162,11 +165,11 @@ class Queue:
     '''
     def copy(self):
         newStack = Queue()
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         if self.current is not None:
             while self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 newStack.Push(self.current.data)
                 self.current = self.current.getNext()
             newStack.Push(self.current.data)

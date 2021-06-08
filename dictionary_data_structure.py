@@ -4,9 +4,11 @@ MyDict - My version of the class Dictionary
 Author: Kethan Vegunta
 ---------------------------------------------
 Description:
-My version of the python dictionary. It's syntax is very similar to a regular python dict. 
+My version of the python dictionary. It's syntax is very similar to a regular
+python dict.
 '''
 import pickle
+
 
 class MyDict:
     '''
@@ -64,16 +66,25 @@ class MyDict:
         print(key)
     '''
     def values(self):
-        return {self[self.__convert_str_to_item(key)] for key in list(vars(self))}
+        return {
+            self[self.__convert_str_to_item(key)] for key in list(vars(self))
+        }
 
     '''
-    items() returns a set of tuples, with each tuple containing a key, value pair
+    items() returns a set of tuples, with each tuple containing a key,
+    value pair.
     Iterate Through MyDict Keys and Values:
     for key, value in myDict1.items():
         print(key, value)
     '''
     def items(self):
-        return {(self.__convert_str_to_item(key), self[self.__convert_str_to_item(key)]) for key in list(vars(self))}
+        return {
+            (
+                self.__convert_str_to_item(key),
+                self[self.__convert_str_to_item(key)]
+            )
+            for key in list(vars(self))
+        }
 
     '''
     Update MyDict:
@@ -113,10 +124,12 @@ class MyDict:
         for key, value in self.items():
             newMyDict[key] = value
         return newMyDict
-    
+
     def __convert_item_to_str(self, item):
         return pickle.dumps(item).decode('unicode_escape')
 
     def __convert_str_to_item(self, item):
-        return pickle.loads(item.encode('utf-8', 'unicode_escape').replace(b'\xc2', b''))
+        return pickle.loads(
+            item.encode('utf-8', 'unicode_escape').replace(b'\xc2', b'')
+        )
 

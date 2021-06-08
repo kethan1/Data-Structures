@@ -4,29 +4,34 @@ Stack - My version of the data structure stacak
 Author: Kethan Vegunta
 ---------------------------------------------
 Description:
-My version of the stack. This includes the ListStack (made with a list), and Stack (made with
-Nodes, similar to a LinkedList).
+My version of the stack. This includes the ListStack (made with a list), and
+Stack (made with Nodes, similar to a LinkedList).
 '''
+
+from typing import Any
+
 
 class StackOverflow(BaseException):
     pass
+
 
 # List Implementation of a Stack
 class ListStack:
     '''
     Create a ListStack
-    :param limit, maximum number of elements in ListStack. Default is None, which means no
-    limit on number of elements. 
+    :param limit, maximum number of elements in ListStack. Default is None,
+    which means no limit on number of elements.
     '''
     def __init__(self, limit=None):
         self.stck = []
         self.limit = limit
 
     '''
-    Adds element to end of ListStack, raises StackOverflow is there are more elements than the limit
+    Adds element to end of ListStack, raises StackOverflow is there are more
+    elements than the limit
     :param data, the data to add to the ListStack
     '''
-    def Push(self, data):
+    def Push(self, data: Any):
         if isinstance(self.limit, int):
             if self.limit is not None and self.limit < len(self.stck)+1:
                 raise StackOverflow
@@ -55,13 +60,15 @@ class ListStack:
         return len(self.stck)
 
     '''
-    Returns a boolean value (True or False) depending on whether the stack is empty
+    Returns a boolean value (True or False) depending on whether the stack is
+    empty
     '''
     def isEmptyStack(self):
         return not(bool(self.stck))
 
     '''
-    Returns a boolean value (True or False) depending on whether the stack is full
+    Returns a boolean value (True or False) depending on whether the stack is
+    full
     '''
     def isFullStack(self):
         if isinstance(self.limit, int):
@@ -85,8 +92,8 @@ class Node:
         self.prev = None
 
     # method for setting the data field of the node
-    def setData(self, data):
-        self.data=data
+    def setData(self, data: Any):
+        self.data = data
 
     # method for getting the data field of the node
     def getData(self):
@@ -94,7 +101,7 @@ class Node:
 
     # method for setting the next field of the node
     def setNext(self, nextOne):
-        self.next=nextOne
+        self.next = nextOne
 
     # method for getting the next field of the node
     def getNext(self):
@@ -102,7 +109,7 @@ class Node:
 
     # return True if the node has a pointer to the next node
     def hasNext(self):
-        return self.next != None
+        return self.next is not None
 
     # method for setting the next field of the node
     def setPrev(self, prevOne):
@@ -114,7 +121,7 @@ class Node:
 
     # return True if the node has a pointer to the previous node
     def hasPrev(self):
-        return self.prev != None
+        return self.prev is not None
 
     '''
     returns a copy of the current Node's data
@@ -128,6 +135,7 @@ class Node:
             to_return.prev = self.prev
             return to_return
         return Node(self.data)
+
 
 # Linked Stack
 class Stack:
@@ -150,7 +158,8 @@ class Stack:
         return Node(data)
 
     '''
-    Checks if stack has too many elements, and if it does, it raises StackOverflow
+    Checks if stack has too many elements, and if it does, it raises
+    StackOverflow
     '''
     def __isError(self):
         if self.limit is not None and self.limit <= self.Size():
@@ -195,13 +204,13 @@ class Stack:
     Returns the size of the stack
     '''
     def Size(self):
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         if self.current is not None:
             while self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.getNext()
-            return currentNum+1
+            return currentNum + 1
         return currentNum
 
     '''
@@ -223,11 +232,11 @@ class Stack:
     Do not use this, testing only
     '''
     def showAll(self):
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         if self.current is not None:
             while self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 yield self.current.data
                 self.current = self.current.getNext()
             yield self.current.data
@@ -237,11 +246,11 @@ class Stack:
     '''
     def copy(self):
         newStack = Stack()
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
         if self.current is not None:
             while self.current.getNext() is not None:
-                currentNum+=1
+                currentNum += 1
                 newStack.Push(self.current.data)
                 self.current = self.current.getNext()
             newStack.Push(self.current.data)
@@ -262,4 +271,3 @@ class Stack:
 
     def __str__(self):
         return str(list(self.showAll()))
-

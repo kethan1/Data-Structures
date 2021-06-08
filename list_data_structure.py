@@ -4,12 +4,13 @@ MyList - My version of the class list
 Author: Kethan Vegunta
 ---------------------------------------------
 Description:
-This is my version of the python list. It is a double LinkedList, so you can traverse the
-LinkedList forward or backward. You can use MyList almost exactly like you would use a 
-regular python list. 
+This is my version of the python list. It is a double LinkedList, so you can
+traverse the LinkedList forward or backward. You can use MyList almost exactly
+like you would use a regular python list.
 '''
 
-from typing import Type, Union, Iterable, Any
+from typing import Union, Iterable, Any
+
 
 # Node of a doubly LinkedList
 class Node:
@@ -37,7 +38,7 @@ class Node:
 
     # return True if the node has a pointer to the next node
     def hasNext(self):
-        return self.next != None
+        return self.next is not None
 
     # method for setting the next field of the node
     def setPrev(self, prevOne):
@@ -49,7 +50,7 @@ class Node:
 
     # return True if the node has a pointer to the previous node
     def hasPrev(self):
-        return self.prev != None
+        return self.prev is not None
 
     '''
     returns a copy of the current Node's data
@@ -64,7 +65,12 @@ class Node:
             return to_return
         return Node(self.data)
 
+
 class MyList:
+    '''
+    Called when an instance of MyList is created.
+    :param iterable - All element of the iterable are appending to MyList
+    '''
     def __init__(self, iterable: Iterable = None):
         self.__head = None
         self.current = None
@@ -73,6 +79,10 @@ class MyList:
             for item in iterable:
                 self.append(item)
 
+    '''
+    Adds an element to the end of MyList.
+    :param data - The data that is added.
+    '''
     def append(self, data):
         data = self.__toNode(data)
         if self.tail is not None:
@@ -83,7 +93,7 @@ class MyList:
             self.head = data
 
     '''
-    # Inserts an element at the specified position in MyList
+    Inserts an element at the specified position in MyList
     :param data accepts either an instance of the class Node or some other data
     :param pos takes an integer with the position to insert the element
     '''
@@ -108,10 +118,10 @@ class MyList:
         else:
             if pos < 0:
                 pos = len(self)-(abs(pos)-1)
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos-1:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.next
             tmp = self.current.next
             data.next = tmp
@@ -120,6 +130,10 @@ class MyList:
             if tmp is not None:
                 tmp.prev = data
 
+    '''
+    Removes element depending on the data.
+    :param data - The data of the element that is going to be removed.
+    '''
     def remove(self, data):
         self.pop(self.index(data))
 
@@ -130,7 +144,7 @@ class MyList:
             toReturn = self.head
             tmp = self.head.next
             self.head = tmp
-            if tmp == None:
+            if tmp is None:
                 self.tail = None
                 return
             self.head.prev = None
@@ -139,10 +153,10 @@ class MyList:
             self.tail = self.tail.prev
             self.tail.next = None
         else:
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos-1:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.next
             toReturn = self.current.next
             tmp = self.current.next.next
@@ -163,7 +177,7 @@ class MyList:
         for element in self:
             if element == element_to_find:
                 return currentNum
-            currentNum+=1
+            currentNum += 1
 
     def copy(self) -> "MyList":
         to_return_copy = MyList()
@@ -186,24 +200,25 @@ class MyList:
 
             current = currentLeft = currentRight = 0
 
-            while currentLeft < len(mergeSortLeft) and currentRight < len(mergeSortRight):
+            while currentLeft < len(mergeSortLeft) and currentRight < \
+                    len(mergeSortRight):
                 if mergeSortLeft[currentLeft] < mergeSortRight[currentRight]:
                     copyList[current] = mergeSortLeft[currentLeft]
-                    currentLeft+=1
+                    currentLeft += 1
                 else:
                     copyList[current] = mergeSortRight[currentRight]
-                    currentRight+=1
-                current+=1
+                    currentRight += 1
+                current += 1
 
             while currentLeft < len(mergeSortLeft):
                 copyList[current] = mergeSortLeft[currentLeft]
-                currentLeft+=1
-                current+=1
+                currentLeft += 1
+                current += 1
 
             while currentRight < len(mergeSortRight):
                 copyList[current] = mergeSortRight[currentRight]
-                currentRight+=1
-                current+=1
+                currentRight += 1
+                current += 1
         if part is None:
             for index, data in enumerate(copyList):
                 self[index] = data
@@ -249,22 +264,24 @@ class MyList:
         return data
 
     '''
-    Returns length of MyList. 
+    Returns length of MyList.
     '''
     def __len__(self):
-        self.current=self.head
+        self.current = self.head
         currentNum = 0
-        if self.current != None:
+        if self.current is not None:
             while self.current is not None:
                 if self.current.next is not None:
-                    currentNum+=1
+                    currentNum += 1
                     self.current = self.current.next
-                else: break
+                else:
+                    break
             return currentNum+1
 
     '''
     MyList supports item assignment: mylist_var[0] = 99
-    This updates the item's data at the specified position, to the specified data
+    This updates the item's data at the specified position, to the specified
+    data.
     '''
     def __setitem__(self, pos: int, data):
         data = self.__toData(data)
@@ -275,16 +292,16 @@ class MyList:
         elif pos == len(self):
             self.tail.data = data
         else:
-            self.current=self.head
+            self.current = self.head
             currentNum = 0
             while currentNum < pos:
-                currentNum+=1
+                currentNum += 1
                 self.current = self.current.next
             self.current.data = data
 
     '''
     MyList supports item indexing: mylist_var[0].
-    It also supports slices, though step is not yet implemented. 
+    It also supports slices, though step is not yet implemented.
     '''
     def __getitem__(self, index: Union[int, slice]) -> Union["MyList", Node]:
         if not isinstance(index, slice):
@@ -297,10 +314,10 @@ class MyList:
             else:
                 if index < 0:
                     index = len(self)-(abs(index)-1)
-                self.current=self.head
+                self.current = self.head
                 currentNum = 0
                 while currentNum < index:
-                    currentNum+=1
+                    currentNum += 1
                     self.current = self.current.next
                 return self.current.data
         else:
@@ -321,42 +338,52 @@ class MyList:
                         step_startIndex = None
                         for element in self.DisplayAllNodes(getObj=True):
                             if start <= currentIndex < stop:
-                                if step_startIndex == None:
+                                if step_startIndex is not None:
                                     step_startIndex = 0
                                 if step_startIndex == 0:
-                                    copy_of_current_my_list.insertAtEnd(Node(element.data))
+                                    copy_of_current_my_list.insertAtEnd(
+                                        Node(element.data)
+                                    )
                                 else:
-                                    if step_startIndex%step == 0:
-                                        copy_of_current_my_list.insertAtEnd(Node(element.data))
-                                step_startIndex+=1
-                            currentIndex+=1
+                                    if step_startIndex % step == 0:
+                                        copy_of_current_my_list.insertAtEnd(
+                                            Node(element.data)
+                                        )
+                                step_startIndex += 1
+                            currentIndex += 1
                     else:
                         self.current = self.tail
                         currentNum = len(self)-1
                         while currentNum >= 0:
                             if start <= currentIndex < stop:
-                                copy_of_current_my_list.insertAtEnd(Node(self.current.data))
-                            currentIndex+=1
+                                copy_of_current_my_list.insertAtEnd(
+                                    Node(self.current.data)
+                                )
+                            currentIndex += 1
                             self.current = self.current.prev
                         return copy_of_current_my_list
                 else:
                     step_startIndex = None
                     for element in self.DisplayAllNodes(getObj=True):
                         if start <= currentIndex < stop:
-                            if step_startIndex == None:
+                            if step_startIndex is not None:
                                 step_startIndex = 0
                             if step_startIndex == 0:
-                                copy_of_current_my_list.insertAtEnd(Node(element.data))
+                                copy_of_current_my_list.insertAtEnd(
+                                    Node(element.data)
+                                )
                             else:
                                 if step_startIndex % step == 0:
-                                    copy_of_current_my_list.insertAtEnd(Node(element.data))
-                            step_startIndex+=1
-                        currentIndex+=1
+                                    copy_of_current_my_list.insertAtEnd(
+                                        Node(element.data)
+                                    )
+                            step_startIndex += 1
+                        currentIndex += 1
                 return copy_of_current_my_list
             for element in self.__iter__(getObj=True):
                 if start <= currentIndex < stop:
                     copy_of_current_my_list.append(Node(element.data))
-                currentIndex+=1
+                currentIndex += 1
             return copy_of_current_my_list
 
     def __delitem__(self, pos: int) -> None:
@@ -364,12 +391,12 @@ class MyList:
 
     '''
     # Iterating Through MyList
-    You can iterate through the MyList with a for loop. By default, it returns the data, but
-    can pass back a Node object depending on getObj. 
+    You can iterate through the MyList with a for loop. By default, it returns
+    the data, but can pass back a Node object depending on getObj.
     :param getObj, returns the Node object instead of the data
     '''
     def __iter__(self, getObj: bool = False) -> Iterable:
-        self.current=self.head
+        self.current = self.head
         while self.current is not None:
             if getObj:
                 yield self.current
@@ -401,6 +428,19 @@ class MyList:
     def __rmul__(self, value) -> "MyList":
         return self.__mul__(value)
 
+    def __eq__(self, value):
+        if isinstance(value, Iterable):
+            to_return = True
+            try:
+                for index, data in enumerate(self):
+                    if value[index] != data:
+                        to_return = False
+            except IndexError:
+                return False
+            return to_return
+        else:
+            return False
+
     def __str__(self) -> str:
         return f"[{', '.join(str(item) for item in self)}]"
 
@@ -411,20 +451,5 @@ class MyList:
     @head.setter
     def head(self, value: Any):
         self.__head = value
-        if self.tail == None:
+        if self.tail is None:
             self.tail = self.__head
-
-# Implemented
-# append
-# remove
-# insert
-# pop
-# index
-# copy
-# sort
-# adding
-# multiplication
-# extend
-# count
-# clear
-# reverse
