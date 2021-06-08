@@ -2,12 +2,8 @@ import os
 import sys
 import inspect
 
-sys.path.insert(0, os.path.dirname(
-        os.path.dirname(
-            os.path.abspath(inspect.getfile(inspect.currentframe()))
-        )
-    )
-)
+sys.path.insert(0, os.path.dirname(os.path.dirname(
+    os.path.abspath(inspect.getfile(inspect.currentframe())))))
 
 from dictionary_data_structure import MyDict
 from class_for_testing import TestClass

@@ -1,4 +1,6 @@
 class TestClass:
+    __test__ = False
+
     def __init__(self, x, y=0, z=0):
         self.x = x
         self.y = y

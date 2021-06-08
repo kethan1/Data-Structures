@@ -132,4 +132,3 @@ class MyDict:
         return pickle.loads(
             item.encode('utf-8', 'unicode_escape').replace(b'\xc2', b'')
         )
-

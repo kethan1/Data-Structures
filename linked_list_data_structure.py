@@ -97,7 +97,7 @@ class LinkedList:
             if self.current.getNext() is not None:
                 currentNum += 1
                 self.current = self.current.getNext()
-            else: 
+            else:
                 break
         return currentNum+1
 
