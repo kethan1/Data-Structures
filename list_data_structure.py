@@ -313,7 +313,7 @@ class MyList:
                 return self.tail.data
             else:
                 if index < 0:
-                    index = len(self)-(abs(index)-1)
+                    index = len(self) - (abs(index) - 1)
                 self.current = self.head
                 currentNum = 0
                 while currentNum < index:
@@ -324,10 +324,8 @@ class MyList:
             start = 0 if index.start is None else index.start
             stop = len(self) if index.stop is None else index.stop
             step = 1 if index.step is None else index.step
-            if start < 0:
-                start = len(self)-(abs(start)-1)
-            if stop < 0:
-                stop = len(self)-(abs(stop)-1)
+            start = len(self) - (abs(start) - 1) if start < 0 else start
+            stop = len(self) - (abs(stop) - 1) if stop < 0 else stop
             copy_of_current_my_list = MyList()
             currentIndex = 0
             if step != 1:
@@ -388,6 +386,14 @@ class MyList:
 
     def __delitem__(self, pos: int) -> None:
         self.pop(pos)
+
+    def __reversed__(self):
+        self_copy = self.copy()
+        self_copy.reverse()
+        return self_copy
+
+    def __bool__(self):
+        return self.__head is not None
 
     '''
     # Iterating Through MyList

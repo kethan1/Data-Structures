@@ -1,11 +1,11 @@
-import os
-import sys
-import inspect
 import json
 import timeit
+import os
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(
-    os.path.abspath(inspect.getfile(inspect.currentframe())))))
+import sys
+import pathlib
+
+sys.path.insert(0, str(pathlib.Path(__file__).parents[1].absolute()))
 
 from linked_list_data_structure import LinkedList
 

@@ -1,9 +1,7 @@
-import os
 import sys
-import inspect
+import pathlib
 
-sys.path.insert(0, os.path.dirname(
-    os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))))
+sys.path.insert(0, str(pathlib.Path(__file__).parents[1].absolute()))
 
 from tree_data_structure import Node
 
@@ -17,5 +15,6 @@ root[1].insert("Jan")
 root[1].insert("Joe")
 root.insert("Joe")
 
+assert root.hasChildren()
 assert str(root) == "Udo\n├── Marc\n│   └── Lian\n│       └── Lian\n├── Dan\n│   ├── Jet\n│   ├── Jan\n│   └── Joe\n└── Joe"
 print(root)

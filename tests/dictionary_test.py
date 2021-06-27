@@ -1,9 +1,7 @@
-import os
 import sys
-import inspect
+import pathlib
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(
-    os.path.abspath(inspect.getfile(inspect.currentframe())))))
+sys.path.insert(0, str(pathlib.Path(__file__).parents[1].absolute()))
 
 from dictionary_data_structure import MyDict
 from class_for_testing import TestClass

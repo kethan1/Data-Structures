@@ -1,9 +1,7 @@
-import os
 import sys
-import inspect
+import pathlib
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(
-    os.path.abspath(inspect.getfile(inspect.currentframe())))))
+sys.path.insert(0, str(pathlib.Path(__file__).parents[1].absolute()))
 
 from linked_list_data_structure import LinkedList, Node
 
