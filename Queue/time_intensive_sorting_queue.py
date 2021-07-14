@@ -1,9 +1,3 @@
-import sys
-import os
-import timeit
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-
 from queue_data_structure import Queue
 
 books = Queue()

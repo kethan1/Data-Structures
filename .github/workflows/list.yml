@@ -17,5 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python list_data_structure.py
-          python tests/list_test.py
+          for file in List/*.py; do python "$file"; done
+        shell: bash

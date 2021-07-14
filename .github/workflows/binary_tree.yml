@@ -17,6 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python binary_tree.py
-          python tests/binary_tree_test.py
-          python tests/search_binary_tree.py
+          for file in Binary_Tree/*.py; do python "$file"; done
+        shell: bash

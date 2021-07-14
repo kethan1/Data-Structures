@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.x', 'pypy-3.7' ]
+        python-version: ['3.x', 'pypy-3.7']
     name: Python ${{ matrix.python-version }} Linked Queue Testing
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python queue_data_structure.py
-          python tests/queue/queue_test.py
-          python tests/queue/sorting_queue.py
+          for file in Queue/*.py; do python "$file"; done
+        shell: bash

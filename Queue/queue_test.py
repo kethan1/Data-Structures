@@ -1,8 +1,3 @@
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-
 from queue_data_structure import Queue, QueueOverflow
 
 linkedstack1 = Queue()

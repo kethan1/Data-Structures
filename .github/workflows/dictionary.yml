@@ -17,5 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python dictionary_data_structure.py
-          python tests/dictionary_test.py
+          for file in Dictionary/*.py; do python "$file"; done
+        shell: bash

@@ -17,6 +17,5 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: |
-          python stack_data_structure.py
-          python tests/stack/stack_test.py
-          python tests/stack/sorting_stack.py
+          for file in Stack/*.py; do python "$file"; done
+        shell: bash

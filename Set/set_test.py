@@ -1,9 +1,10 @@
 import sys
 import pathlib
 
+from set_data_structure import MySet
+
 sys.path.insert(0, str(pathlib.Path(__file__).parents[1].absolute()))
 
-from set_data_structure import MySet
 from class_for_testing import TestClass
 
 
